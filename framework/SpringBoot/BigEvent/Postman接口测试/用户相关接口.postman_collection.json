@@ -1,0 +1,266 @@
+{
+	"info": {
+		"_postman_id": "c6b0027d-1996-4212-92a4-72c2815c82d4",
+		"name": "用户相关接口",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36233532"
+	},
+	"item": [
+		{
+			"name": "注册",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "w",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/user/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "登录",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "wangba",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "234567",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/user/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取用户详细信息",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGFpbXMiOnsiaWQiOjQsInVzZXJuYW1lIjoid2FuZ2JhIn0sImV4cCI6MTcxODEzNzYwMX0.pnVDnVVKIqg9Ssx0500nq84ILxxvoDTMXWaFQrtjeSs",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/user/userInfo",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"userInfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "更新用户基本信息",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":4,\r\n    \"username\":\"wangba\",\r\n    \"nickname\":\"wba\",\r\n    \"email\":\"123@heima.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/user/update",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "更新用户头像",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.request.addHeader(\"Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGFpbXMiOnsiaWQiOjQsInVzZXJuYW1lIjoid2FuZ2JhIn0sImV4cCI6MTcyMDcxMTczOH0.qwgkkG7VOr7MGv5NSDkkuDZB3DSXme0vCqvUFOfZL2M\")"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "localhost:8080/user/updateAvatar?avatarUrl=https://www.itheima.com/ly.png",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"updateAvatar"
+					],
+					"query": [
+						{
+							"key": "avatarUrl",
+							"value": "https://www.itheima.com/ly.png"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "更新用户密码",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"old_pwd\":\"123456\",\r\n    \"new_pwd\":\"234567\",\r\n    \"re_pwd\":\"234567\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/user/updatePwd",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"updatePwd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "文章列表",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGFpbXMiOnsiaWQiOjQsInVzZXJuYW1lIjoid2FuZ2JhIn0sImV4cCI6MTcxODEzNzYwMX0.pnVDnVVKIqg9Ssx0500nq84ILxxvoDTMXWaFQrtjeSs",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/article/list",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"article",
+						"list"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.addHeader(\"Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGFpbXMiOnsiaWQiOjQsInVzZXJuYW1lIjoid2FuZ2JhIn0sImV4cCI6MTcyMzI4MDU3NH0.fSDY2LUjTva2bGPbgn2RkVPFX0b-lcNnhObmpgbfSWM\")"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

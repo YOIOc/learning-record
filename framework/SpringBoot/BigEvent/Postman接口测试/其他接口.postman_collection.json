@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "b650cd77-bfa5-4fb4-929e-08f76f5bcd0a",
+		"name": "其他接口",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36233532"
+	},
+	"item": [
+		{
+			"name": "文件上传",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/D:/桌面/用户资料/用户头像.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/upload",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.addHeader(\"Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGFpbXMiOnsiaWQiOjQsInVzZXJuYW1lIjoid2FuZ2JhIn0sImV4cCI6MTcyMzI4MDU3NH0.fSDY2LUjTva2bGPbgn2RkVPFX0b-lcNnhObmpgbfSWM\")"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
