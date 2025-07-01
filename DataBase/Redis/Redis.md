@@ -183,9 +183,9 @@ struct SDS{
 1. 当元素数小于128个且所有元素的长度小于64字节时，使用ziplist；反之使用skiplist
 2. skiplist：为每个节点随机生成一个层数，使得新插入的节点不会影响其他节点的层数，降低了插入的复杂度，同时查找由于多层链表的存在也更加高效
 
-<img src="D:\A\截图\skiplist1.png" alt="skiplist1" style="zoom:80%;" />
+<img src="https://github.com/YOIOc/learning-record/blob/main/image/skiplist1.png" alt="skiplist1" style="zoom:80%;" />
 
-<img src="D:\A\截图\skiplist2.png" alt="skiplist2" style="zoom:80%;" />
+<img src="https://github.com/YOIOc/learning-record/blob/main/image/skiplist2.png" alt="skiplist2" style="zoom:80%;" />
 
 ​	**有序集合的应用**
 
@@ -428,29 +428,29 @@ struct SDS{
   docker run --name redis -p 6379:6379 -v /home/redis/data:/data -v /home/redis/conf/redis.conf:/etc/redis/redis.conf -d redis:bullseye redis-server /etc/redis/redis.conf --appendonly yes
   ```
 
-![添加redis服务器](D:\A\截图\添加redis服务器.png) f
+![添加redis服务器](https://github.com/YOIOc/learning-record/blob/main/image/添加redis服务器.png) f
 
-![连接redis服务器](D:\A\截图\连接redis服务器.png)
+![连接redis服务器](https://github.com/YOIOc/learning-record/blob/main/image/连接redis服务器.png)
 
 - 创建Spring Boot项目
 
-<img src="D:\A\截图\SpringBoot整合redis.png" alt="SpringBoot整合redis" style="zoom:50%;" />
+<img src="https://github.com/YOIOc/learning-record/blob/main/image/SpringBoot整合redis.png" alt="SpringBoot整合redis" style="zoom:50%;" />
 
 - 添加项目所需依赖
 
-<img src="D:\A\截图\SpringBoot整合Redis2.png" alt="SpringBoot整合Redis2" style="zoom:50%;" />
+<img src="https://github.com/YOIOc/learning-record/blob/main/image/SpringBoot整合Redis2.png" alt="SpringBoot整合Redis2" style="zoom:50%;" />
 
 - 创建实体类（创建bean子包，在子包下创建实体类）
 
-<img src="D:\A\截图\SpringBoot整合redis3.png" alt="SpringBoot整合redis3" style="zoom: 107%;" />
+<img src="https://github.com/YOIOc/learning-record/blob/main/image/SpringBoot整合redis3.png" alt="SpringBoot整合redis3" style="zoom: 107%;" />
 
 - 创建仓库接口（创建repository子包，在子包下创建PersonRepository接口）
 
-![SpringBoot整合Redis4](D:\A\截图\SpringBoot整合Redis4.png)
+![SpringBoot整合Redis4](https://github.com/YOIOc/learning-record/blob/main/image/SpringBoot整合Redis4.png)
 
 - 在全局配置文件中配置Redis属性
 
-![配置Redis的配置信息](D:\A\截图\配置Redis的配置信息.png)
+![配置Redis的配置信息](https://github.com/YOIOc/learning-record/blob/main/image/配置Redis的配置信息.png)
 
 - 测试类中编写测试方法
 
@@ -469,7 +469,7 @@ struct SDS{
 
   **自定义个性化查找方法**
 
-![自定义个性化查找方法](D:\A\截图\自定义个性化查找方法.png)
+![自定义个性化查找方法](https://github.com/YOIOc/learning-record/blob/main/image/自定义个性化查找方法.png)
 
 ```java
 // 以'findByLastName'为例
