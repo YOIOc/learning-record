@@ -1,0 +1,4 @@
+#通用配置
+spring:
+  profiles:
+    active: dev
