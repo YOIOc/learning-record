@@ -1,0 +1,53 @@
+#配置springboot服务的启动端口
+server:
+  port: 8085
+
+spring:
+  main:
+    allow-bean-definition-overriding: true #允许覆盖Spring容器中已有的Bean定义
+
+  shardingsphere:
+    props:
+      sql:
+        show: true #显示sql日志
+
+    datasource:
+      names: M1,M1S1,M1S2
+      M1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://47.109.203.48:3306/db1?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=GMT
+        username: root
+        password: 123456
+        maxPoolSize: 100
+        minPoolSize: 5
+      M1S1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://47.109.203.48:3307/db1?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=GMT
+        username: root
+        password: 123456
+        maxPoolSize: 100
+        minPoolSize: 5
+      M1S2:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://47.109.203.48:3308/db1?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=GMT
+        username: root
+        password: 123456
+        maxPoolSize: 100
+        minPoolSize: 5
+
+    sharding:
+      default-data-source-name: M1 #默认数据源(如果不配置那么就会把三个节点都当作从节点，导致DML出错)，主要用于写(一定要配置读写分离)
+
+    masterslave: #配置主从(读写分离)
+      name: MS
+      master-data-source-name: M1
+      slave-data-source-names: M1S1,M1S2
+      load-balance-algorithm-type: round_robin #负载均衡均衡策略，采用轮询机制
+
+# 整合mybatis的配置XXXXX
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.xuexiangban.shardingjdbc.entity #todo
