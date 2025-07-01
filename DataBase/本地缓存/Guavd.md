@@ -43,8 +43,10 @@
 	// maximumSize(100)：最大容量为100，超过最大容量会触发缓存淘汰
 	// expireAfterWrite(5000, TimeUnit.MILLISECONDS)：写入后5秒过期
 	// // .concurrencyLevel(1)：设置缓存的并发级别，即允许多少个线程同时访问缓存
-	// removalListener：监听缓存移除事件，当缓存被移除（显示移除或容量超限）时会触发回调（使用RemovalListener接口实现移除监听器，并重写onRemoval方法打印被移除的键和值，格式为： key移除了,value[value]）
-	// build：缓存加载逻辑，当缓存中不存在某个键时，触发load方法加载数据（使用CacheLoader接口实现加载器，并重写CacheLoader方法，使调用cache.get(key)缓存中不存在key时，自动将key加载到缓存中，value就是方法的返回值）
+	// removalListener：监听缓存移除事件，当缓存被移除（显示移除或容量超限）时会触发回调（使用RemovalListener接口实现移除监听器，
+			    并重写onRemoval方法打印被移除的键和值，格式为： key移除了,value[value]）
+	// build：缓存加载逻辑，当缓存中不存在某个键时，触发load方法加载数据（使用CacheLoader接口实现加载器，并重写CacheLoader方法，
+		  使调用cache.get(key)缓存中不存在key时，自动将key加载到缓存中，value就是方法的返回值）
 
 // 使用LoadingCache实现的缓存，必须在build()参数中设置CacheLoader缓存加载逻辑
 ```
@@ -112,11 +114,14 @@ private static void method2(){
 ## 3.3 Cache对象的get方法，传入一个Callable实例，自定义缓存加载逻辑
 
 ```java
-// 所有类型的Guava Cache，不管有没有自动加载功能，都支持get(K, Callable<V>)方法。这个方法返回缓存中相应的值,或者用给定的Callable运算并把结果加入到缓存中。在整个加载方法完成前,缓存项相关的可观察状态都不会更改。这个方法简便地实现了"如果有缓存则返回；否则运算、缓存、然后返回"
+// 所有类型的Guava Cache，不管有没有自动加载功能，都支持get(K, Callable<V>)方法。这个方法返回缓存中相应的值,或者用给定的Callable运算并把结果
+加入到缓存中。在整个加载方法完成前,缓存项相关的可观察状态都不会更改。这个方法简便地实现了"如果有缓存则返回；否则运算、缓存、然后返回"
 
-// 如果缓存中不包含key对应的记录,Guava会启动一个线程执行Callable对象中的call方法,call方法的返回值会作为key对应的值被存储到缓存中,并且被get方法返回
+// 如果缓存中不包含key对应的记录,Guava会启动一个线程执行Callable对象中的call方法,call方法的返回值会作为key对应的值被存储到缓存中,并且被get方法
+返回
 
-// Guava可以保证当有多个线程同时访问Cache中的一个key时,如果key对应的记录不存在,Guava只会启动一个线程执行get方法中Callable参数对应的任务加载数据存到缓存。当加载完数据后,任何线程中的get方法都会获取到key对应的值
+// Guava可以保证当有多个线程同时访问Cache中的一个key时,如果key对应的记录不存在,Guava只会启动一个线程执行get方法中Callable参数对应的任务加载数据
+存到缓存。当加载完数据后,任何线程中的get方法都会获取到key对应的值
 ```
 
 ```java
@@ -205,30 +210,31 @@ private static void expireAfterWriteMethod() throws ExecutionException, Interrup
 
 ## 4.3 引用回收
 
-> ​	基于Reference-based Eviction(通过使用弱引用的键、或弱引用的值、或软引用的值，Guava Cache可以把缓存设置为允许垃圾回收）
->
-> - 强引用：Object obj = new Object();垃圾回收器不会回收该对象
->
-> - 弱引用：WeakReference<Object> weakRef = new WeakReference<>(new Object());对象被WeakReference封装，垃圾回收器会在下一次垃圾回收时直接回收该对象
->
-> - 软引用：SoftReference<Object> softRef = new SoftReference<>(new Object());对象被SoftReference封装，垃圾回收器会在内存不足时回收该对象
+​	基于Reference-based Eviction(通过使用弱引用的键、或弱引用的值、或软引用的值，Guava Cache可以把缓存设置为允许垃圾回收）
 
-1. CacheBuilder.weakKeys()：使用弱引用存储键。当键没有其它强或软引用时，缓存项可以被垃圾回收，值的比较是使用 `==` 比较内存地址而不是 `equals` 比较值
+**强引用**：Object obj = new Object();垃圾回收器不会回收该对象
 
-   ```java
-   // 创建一个使用弱引用存储键的缓存
-   Cache<String, String> cache = CacheBuilder.newBuilder()
-           .weakKeys() // 使用弱引用存储键
-           .build();
-   
-   // 强引用指向键(虽然缓存设置了弱引用存储，但由于缓存键被强引用，所以该缓存项不会被垃圾回收)
-   String strongKey = "strongKey";
-   cache.put(strongKey, "value");
-   ```
+**弱引用**：WeakReference<Object> weakRef = new WeakReference<>(new Object());对象被WeakReference封装，垃圾回收器会在下一次垃圾回收时直接回收该对象
 
-2. CacheBuilder.weakValues()：使用弱引用存储值。当值没有其它强或软引用时，缓存项可以被垃圾回收，值的比较是使用 `==` 比较内存地址而不是 `equals` 比较值
+**软引用**：SoftReference<Object> softRef = new SoftReference<>(new Object());对象被SoftReference封装，垃圾回收器会在内存不足时回收该对象
 
-3. CacheBuilder.softValues()：使用软引用存储值。软引用只有在响应内存需要时，才按照全局最近最少使用的顺序回收（软引用的回收具有不可预测性，所以在缓存设计中，建议使用容量回收，直接限定缓存大小可以更好地预测性能）值的比较是使用 `==` 比较内存地址而不是 `equals` 比较值
+- CacheBuilder.weakKeys()：使用弱引用存储键。当键没有其它强或软引用时，缓存项可以被垃圾回收，值的比较是使用 `==` 比较内存地址而不是 `equals` 比较值
+
+
+```java
+// 创建一个使用弱引用存储键的缓存
+Cache<String, String> cache = CacheBuilder.newBuilder()
+        .weakKeys() // 使用弱引用存储键
+        .build();
+
+// 强引用指向键(虽然缓存设置了弱引用存储，但由于缓存键被强引用，所以该缓存项不会被垃圾回收)
+String strongKey = "strongKey";
+cache.put(strongKey, "value");
+```
+
+- CacheBuilder.weakValues()：使用弱引用存储值。当值没有其它强或软引用时，缓存项可以被垃圾回收，值的比较是使用 `==` 比较内存地址而不是 `equals` 比较值
+
+- CacheBuilder.softValues()：使用软引用存储值。软引用只有在响应内存需要时，才按照全局最近最少使用的顺序回收（软引用的回收具有不可预测性，所以在缓存设计中，建议使用容量回收，直接限定缓存大小可以更好地预测性能）值的比较是使用 `==` 比较内存地址而不是 `equals` 比较值
 
 ```java
 public class GuavaExpireDemo {
