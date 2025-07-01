@@ -325,13 +325,13 @@ spring:
         user:
           actual-data-nodes: db$->{0..1}.user$->{0..1} #分库分表结构
           database-strategy:
-            inline: 
-		      sharding-column: sex #分库字段
-		      algorithm-expression: db$->{sex%2} #分库逻辑
-		  table-strategy:
-			inline:
-			  sharding-column: age #分表字段
-			  algorithm-expression: user$->{age%2} #分表逻辑
+            inline:
+              sharding-column: sex #分库字段
+              algorithm-expression: db$->{sex%2} #分库逻辑
+          table-strategy:
+            inline:
+              sharding-column: age #分表字段
+              algorithm-expression: user$->{age%2} #分表逻辑
 ```
 
 ### 4.1.2 日期分片(standard)
@@ -343,17 +343,17 @@ spring:
   shardingsphere:
     sharding:
       tables:
-      	# 分片的表名(逻辑)
+        # 分片的表名(逻辑)
         user:
       	  actual-data-nodes: db$->{0..1}.user$->{0..1}
       	    database-strategy:
-      		  standard:
-      		    sharding-column: birthday
-      			preciseAlgorithmClassName: [分片规则类的全限定包名]
-      		table-strategy:
-      		  inline:
-      		    sharding-column: age
-			  	algorithm-expression: user$->{age%2}
+              standard:
+                sharding-column: birthday
+                preciseAlgorithmClassName: [分片规则类的全限定包名]
+            table-strategy:
+              inline:
+                sharding-column: age
+                algorithm-expression: user$->{age%2}
 ```
 
 策略实现类
