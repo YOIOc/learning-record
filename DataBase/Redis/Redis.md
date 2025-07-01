@@ -502,7 +502,25 @@ public void testFindByAddress_City() {
 
 > ​	RedisTemplate是Spring Data Redis提供的核心工具类，用于简化Redis的交互操作，它封装了底层连接管理、数据序列化、异常处理等细节，支持多种数据结构的操作，并于Spring生态无缝集成
 
-### 3.1.2操作不同数据结构时的用法
+### 3.1.2使用前提
+- 导入相关依赖(Redisson)
+
+  ```xml
+  <!--Redisson是一个基于Redis的Java客户端，提供了分布式锁的实现--> 
+  <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+  </dependency>
+  ```
+
+- 配置Redisson
+
+  ```properties
+  spring.redis.port=<redis-port>
+  spring.redis.host=<redis-host>
+  ```
+
+### 3.1.3操作不同数据结构时的用法
 
 - 字符串
 
