@@ -10,11 +10,11 @@
 
 1. 创建一个新的微服务模块
 
-   ![新建模块](https://github.com/YOIOc/learning-record/blob/main\image\新建模块.png)
+   ![新建模块](https://github.com/YOIOc/learning-record/blob/main/image/新建模块.png)
 
 2. 将hm-service中与商品管理相关依赖、配置文件、业务代码拷贝到新建的模块中（其他模块拆分类似）
 
-   ![项目拆分-item](https://github.com/YOIOc/learning-record/blob/main\image\项目拆分-item.png)
+   ![项目拆分-item](https://github.com/YOIOc/learning-record/blob/main/image/项目拆分-item.png)
 
 ## 2.2 微服务之间的远程调用
 
@@ -43,9 +43,9 @@
 
 **代码实现** -- 以查询购物车为例，方法需要知道购物车中商品的最新价格，因此需要商品模块支持
 
-![远程调用1](https://github.com/YOIOc/learning-record/blob/main\image\远程调用1.png)
+![远程调用1](https://github.com/YOIOc/learning-record/blob/main/image/远程调用1.png)
 
-![远程调用2](https://github.com/YOIOc/learning-record/blob/main\image\远程调用2.png)
+![远程调用2](https://github.com/YOIOc/learning-record/blob/main/image/远程调用2.png)
 
 # 3. Nacos
 
@@ -163,11 +163,11 @@ private void handleCartItems(List<CartVO> vos){
   </dependency>
   ```
 
-  ![Feign的最佳实践1](https://github.com/YOIOc/learning-record/blob/main\image\Feign的最佳实践1.png)
+  ![Feign的最佳实践1](https://github.com/YOIOc/learning-record/blob/main/image/Feign的最佳实践1.png)
 
   在公共api模块的client包下，编写需要向其他模块提供的服务接口
 
-  ![Feign最佳实践2](https://github.com/YOIOc/learning-record/blob/main\image\Feign最佳实践2.png)
+  ![Feign最佳实践2](https://github.com/YOIOc/learning-record/blob/main/image/Feign最佳实践2.png)
 
 - **服务提供者模块**：引入nacos依赖，向nacos注册中心注册服务
 
@@ -224,11 +224,11 @@ private void handleCartItems(List<CartVO> vos){
   @EnableFeignClients(basePackages = "com.hmall.api.client")
   ```
 
-  ![Feign的最佳实践3](https://github.com/YOIOc/learning-record/blob/main\image\Feign的最佳实践3.png)
+  ![Feign的最佳实践3](https://github.com/YOIOc/learning-record/blob/main/image/Feign的最佳实践3.png)
 
   注入需要使用的Feign客户端，在需要的位置调用客户端提供的方法
 
-  ![Feign的最佳实践4](https://github.com/YOIOc/learning-record/blob/main\image\Feign的最佳实践4.png)
+  ![Feign的最佳实践4](https://github.com/YOIOc/learning-record/blob/main/image/Feign的最佳实践4.png)
 
 ## 4.2 优化-连接池
 
@@ -258,13 +258,13 @@ private void handleCartItems(List<CartVO> vos){
       enable: true #开启OKHttp连接池支持
   ```
 
-  ![使用OKHttp连接池](https://github.com/YOIOc/learning-record/blob/main\image\使用OKHttp连接池.png)
+  ![使用OKHttp连接池](https://github.com/YOIOc/learning-record/blob/main/image/使用OKHttp连接池.png)
 
 ## 4.3 优化 - 记录日志
 
 - 要输出Feign日志，需要声明一个类型为Logger.Level的Bean，在其中定义日志级别
 
-  ![配置Feign的日志输出级别1](https://github.com/YOIOc/learning-record/blob/main\image\配置Feign的日志输出级别1.png)
+  ![配置Feign的日志输出级别1](https://github.com/YOIOc/learning-record/blob/main/image/配置Feign的日志输出级别1.png)
 
   ```java
   public class DefaultFeignConfig {
@@ -287,7 +287,7 @@ private void handleCartItems(List<CartVO> vos){
   @EnableFeignClients(defaultConfiguration = DefaultFeignConfig.class)
   ```
 
-  ![配置Feign的日志输出级别2](https://github.com/YOIOc/learning-record/blob/main\image\配置Feign的日志输出级别2.png)
+  ![配置Feign的日志输出级别2](https://github.com/YOIOc/learning-record/blob/main/image/配置Feign的日志输出级别2.png)
 
 # 5. Ribbon - 负载均衡
 
@@ -343,13 +343,13 @@ private void handleCartItems(List<CartVO> vos){
 
 ​	在一个完整微服务项目中，每个微服务的ip和port可能都不相同，因此前端在进行页面跳转时可能不知道该向哪里发送请求，而且某些服务需要登录身份验证，如果在每个微服务中都编写验证逻辑，显然会出现代码重复等问题，因此我们需要一个角色，来统一管理资源的跳转与身份校验
 
-![什么是网关](https://github.com/YOIOc/learning-record/blob/main\image\什么是网关.png)
+![什么是网关](https://github.com/YOIOc/learning-record/blob/main/image/什么是网关.png)
 
 ## 6.1 路由、转发
 
 1. 创建新模块
 
-   ![搭建网关1](https://github.com/YOIOc/learning-record/blob/main\image\搭建网关1.png)
+   ![搭建网关1](https://github.com/YOIOc/learning-record/blob/main/image/搭建网关1.png)
 
 2. 引入网关依赖
 
@@ -375,7 +375,7 @@ private void handleCartItems(List<CartVO> vos){
 
 3. 编写启动类
 
-   ![搭建网关2](https://github.com/YOIOc/learning-record/blob/main\image\搭建网关2.png)
+   ![搭建网关2](https://github.com/YOIOc/learning-record/blob/main/image/搭建网关2.png)
 
 4. 配置路由规则
 
@@ -396,73 +396,73 @@ private void handleCartItems(List<CartVO> vos){
 
 ​	前端通过浏览器携带token发送Http请求，请求到达网关后，网关通过过滤器对token进行JWT身份校验，校验通过放行，反之拦截。当请求通过网关JWT校验后，网关将解析token得到的用户信息保存到请求头，将请求转发到对应的微服务中，微服务的拦截器先获取请求头中的用户信息，再将用户信息保存到ThreadLocal中，方便业务获取用户信息
 
-![网关与微服务之间传递用户信息](https://github.com/YOIOc/learning-record/blob/main\image\网关与微服务之间传递用户信息.png)
+![网关与微服务之间传递用户信息](https://github.com/YOIOc/learning-record/blob/main/image/网关与微服务之间传递用户信息.png)
 
 ### 6.2.1 身份校验
 
 - 为网关模块添加身份校验所需要的文件
 
-  ![添加登陆校验前需要的必备文件](https://github.com/YOIOc/learning-record/blob/main\image\添加登陆校验前需要的必备文件.png)
+  ![添加登陆校验前需要的必备文件](https://github.com/YOIOc/learning-record/blob/main/image/添加登陆校验前需要的必备文件.png)
 
 - 网关模块下编写全局过滤器，在过滤器中编写身份校验代码
 
-  ![全局过滤器](https://github.com/YOIOc/learning-record/blob/main\image\全局过滤器.png)
+  ![全局过滤器](https://github.com/YOIOc/learning-record/blob/main/image/全局过滤器.png)
 
 ### 6.2.2 用户信息的传递 网关→微服务
 
 - 在hm-gateway.filter下将用户信息添加到新的请求头中
 
-  ![将网关中的用户信息发送给微服务](https://github.com/YOIOc/learning-record/blob/main\image\将网关中的用户信息发送给微服务1.png)
+  ![将网关中的用户信息发送给微服务](https://github.com/YOIOc/learning-record/blob/main/image/将网关中的用户信息发送给微服务1.png)
 
 - 在hm-common模块的interceptors下编写SpringMVC拦截器，这样微服务只需要引入依赖即可生效，无需重复编写
 
-  ![将网关中的用户信息发送给微服务2](https://github.com/YOIOc/learning-record/blob/main\image\将网关中的用户信息发送给微服务2.png)
+  ![将网关中的用户信息发送给微服务2](https://github.com/YOIOc/learning-record/blob/main/image/将网关中的用户信息发送给微服务2.png)
 
 - 在hm-common模块的config下编写SpringMVC的配置类，将自定义的拦截器注册到SpringMC中，并指定只有存在SpringMVC核心依赖(DispatcherServlet.class)的模块才添加该配置类
 
-  ![将网关中的用户信息发送给微服务3](https://github.com/YOIOc/learning-record/blob/main\image\将网关中的用户信息发送给微服务3.png)
+  ![将网关中的用户信息发送给微服务3](https://github.com/YOIOc/learning-record/blob/main/image/将网关中的用户信息发送给微服务3.png)
 
 - 在hm-common模块resources.META-INF包下的文件中，添加该配置类
 
-  ![将网关中的用户信息发送给微服务4](https://github.com/YOIOc/learning-record/blob/main\image\将网关中的用户信息发送给微服务4.png)
+  ![将网关中的用户信息发送给微服务4](https://github.com/YOIOc/learning-record/blob/main/image/将网关中的用户信息发送给微服务4.png)
 
 ### 6.2.3 用户信息的传递 微服务→微服务
 
 - 微服务之间的请求跳转，是通过OpenFeign客户端发送的，而OpenFeign提供了一个拦截器接口，所有由OpenFeign发起的请求都会先调用拦截器处理请求，因此可以在hm-gateway模块config包下的DefaultFeignConfig配置文件中，定义匿名内部类，来将当前线程ThreadLocal中保存的用户信息保存到转发的请求头中
 
-  ![微服务之间用户信息的传递1](https://github.com/YOIOc/learning-record/blob/main\image\微服务之间用户信息的传递1.png)
+  ![微服务之间用户信息的传递1](https://github.com/YOIOc/learning-record/blob/main/image/微服务之间用户信息的传递1.png)
 
 - 在服务调用者模块的启动类上用@EnableFeignClients注解的defaultConfiguration属性指定OpenFeign的配置类
 
-  ![微服务之间用户信息的传递2](https://github.com/YOIOc/learning-record/blob/main\image\微服务之间用户信息的传递2.png)
+  ![微服务之间用户信息的传递2](https://github.com/YOIOc/learning-record/blob/main/image/微服务之间用户信息的传递2.png)
 
 ## 6.3 总结
 
-![微服务登录校验](https://github.com/YOIOc/learning-record/blob/main\image\微服务登录校验.png)
+![微服务登录校验](https://github.com/YOIOc/learning-record/blob/main/image/微服务登录校验.png)
 
 # 7. 配置管理
 
 ## 7.1 目前微服务架构存在的问题
 
-![配置管理](https://github.com/YOIOc/learning-record/blob/main\image\配置管理.png)
+![配置管理](https://github.com/YOIOc/learning-record/blob/main/image/配置管理.png)
 
 ## 7.2 配置共享
 
 ### 7.2.1 打开项目Nacos页面，将共享配置添加到Nacos的配置管理中
 
-![配置管理1](https://github.com/YOIOc/learning-record/blob/main\image\配置管理1.png)
+![配置管理1](https://github.com/YOIOc/learning-record/blob/main/image/配置管理1.png)
 
-![配置管理2](https://github.com/YOIOc/learning-record/blob/main\image\配置管理2.png)
+![配置管理2](https://github.com/YOIOc/learning-record/blob/main/image/配置管理2.png)
 
 ### 7.2.2 将共享配置中不一致的配置信息，写到微服务项目自身的application.yaml文件中
 
-![配置管理5](https://github.com/YOIOc/learning-record/blob/main\image\配置管理5.png)
+![配置管理5](https://github.com/YOIOc/learning-record/blob/main/image/配置管理5.png)
 
 ### 7.2.3 拉取共享配置
 
 ​	基于Nacos共享配置后，微服务在启动时会先加载Nacos中的共享配置信息，然后加载微服务自己配置文件中的配置信息，最后启动项目，但由于Nacos的服务地址写在微服务的配置文件中，而微服务启动又要先知道Nacos的服务地址，在这种矛盾情况下，就要使用SpringCloud提供的bootstrap.yam配置文件(引导配置文件)，使用后微服务在启动前会优先读取该配置文件中的内容
 
-![配置管理3](https://github.com/YOIOc/learning-record/blob/main\image\配置管理3.png)
+![配置管理3](https://github.com/YOIOc/learning-record/blob/main/image/配置管理3.png)
 
 - 引入配置管理所需依赖
 
@@ -481,7 +481,7 @@ private void handleCartItems(List<CartVO> vos){
 
 - 编写bootstrap.yaml
 
-  ![配置管理4](https://github.com/YOIOc/learning-record/blob/main\image\配置管理4.png)
+  ![配置管理4](https://github.com/YOIOc/learning-record/blob/main/image/配置管理4.png)
 
 ## 7.2 配置热更新
 
@@ -572,37 +572,37 @@ private void handleCartItems(List<CartVO> vos){
 
 - 在簇点链路后面点击流控按钮，即可对其作限流配置
 
-  ![请求限流1](https://github.com/YOIOc/learning-record/blob/main\image\请求限流1.png)
+  ![请求限流1](https://github.com/YOIOc/learning-record/blob/main/image/请求限流1.png)
 
-  ![请求限流2](https://github.com/YOIOc/learning-record/blob/main\image\请求限流2.png)
+  ![请求限流2](https://github.com/YOIOc/learning-record/blob/main/image/请求限流2.png)
 
 - 限流测试
 
-  ![限流测试2](https://github.com/YOIOc/learning-record/blob/main\image\限流测试2.png)
+  ![限流测试2](https://github.com/YOIOc/learning-record/blob/main/image/限流测试2.png)
 
-  ![限流测试3](https://github.com/YOIOc/learning-record/blob/main\image\限流测试3.png)
+  ![限流测试3](https://github.com/YOIOc/learning-record/blob/main/image/限流测试3.png)
 
-  ![限流测试1](https://github.com/YOIOc/learning-record/blob/main\image\限流测试1.png)
+  ![限流测试1](https://github.com/YOIOc/learning-record/blob/main/image/限流测试1.png)
 
 - 测试结果
 
-  ![限流测试4](https://github.com/YOIOc/learning-record/blob/main\image\限流测试4.png)
+  ![限流测试4](https://github.com/YOIOc/learning-record/blob/main/image/限流测试4.png)
 
 ## 8.3 线程隔离
 
 - 在sentinel控制台中，会出现Feign接口的簇点资源，点击后面的流控按钮，即可配置线程隔离
 
-  ![线程隔离1](https://github.com/YOIOc/learning-record/blob/main\image\线程隔离1.png)
+  ![线程隔离1](https://github.com/YOIOc/learning-record/blob/main/image/线程隔离1.png)
 
-  ![线程隔离2](https://github.com/YOIOc/learning-record/blob/main\image\线程隔离2.png)
+  ![线程隔离2](https://github.com/YOIOc/learning-record/blob/main/image/线程隔离2.png)
 
 - 隔离测试
 
-  ![隔离测试2](https://github.com/YOIOc/learning-record/blob/main\image\隔离测试2.png)
+  ![隔离测试2](https://github.com/YOIOc/learning-record/blob/main/image/隔离测试2.png)
 
-  ![隔离测试3](https://github.com/YOIOc/learning-record/blob/main\image\隔离测试3.png)
+  ![隔离测试3](https://github.com/YOIOc/learning-record/blob/main/image/隔离测试3.png)
 
-  ![隔离测试1](https://github.com/YOIOc/learning-record/blob/main\image\隔离测试1.png)
+  ![隔离测试1](https://github.com/YOIOc/learning-record/blob/main/image/隔离测试1.png)
 
 - 测试结果
 
@@ -672,15 +672,15 @@ private void handleCartItems(List<CartVO> vos){
 
 ### 8.5.1 断路器中三种状态的切换
 
-![断路器三种状态的切换](https://github.com/YOIOc/learning-record/blob/main\image\断路器三种状态的切换.png)
+![断路器三种状态的切换](https://github.com/YOIOc/learning-record/blob/main/image/断路器三种状态的切换.png)
 
 ### 8.5.2 开启服务熔断
 
 - 在Sentine控制台中，点击簇点资源后的熔断按钮，即可配置熔断策略
 
-  ![服务熔断1](https://github.com/YOIOc/learning-record/blob/main\image\服务熔断1.png)
+  ![服务熔断1](https://github.com/YOIOc/learning-record/blob/main/image/服务熔断1.png)
 
-  ![服务熔断2](https://github.com/YOIOc/learning-record/blob/main\image\服务熔断2.png)
+  ![服务熔断2](https://github.com/YOIOc/learning-record/blob/main/image/服务熔断2.png)
 
 # 9.分布式事务
 
@@ -688,7 +688,7 @@ private void handleCartItems(List<CartVO> vos){
 
 分布式事务解决思路：解决分布式事务，各个子事务之间必须能感知到彼此的事务状态，才能保证状态一致
 
-![分布式事务解决思路](https://github.com/YOIOc/learning-record/blob/main\image\分布式事务解决思路.png)
+![分布式事务解决思路](https://github.com/YOIOc/learning-record/blob/main/image/分布式事务解决思路.png)
 
 ## 9.1 初始Seata
 
@@ -700,7 +700,7 @@ Seata事务管理中有三个重要的角色
 -  **TM (Transaction Manager) -** **事务管理器：**定义全局事务的范围、开始全局事务、提交或回滚全局事务。 
 -  **RM (Resource Manager) -** **资源管理器：**管理分支事务，与TC交谈以注册分支事务和报告分支事务的状态，并驱动分支事务提交或回滚。 
 
-![Seata工作架构](https://github.com/YOIOc/learning-record/blob/main\image\Seata工作架构.png)
+![Seata工作架构](https://github.com/YOIOc/learning-record/blob/main/image/Seata工作架构.png)
 
 ## 9.2 部署TC
 
@@ -708,13 +708,13 @@ Seata事务管理中有三个重要的角色
 
 Seata支持多种存储模式，但考虑到持久化的需要，我们一般选择基于数据库存储
 
-![seata1](https://github.com/YOIOc/learning-record/blob/main\image\seata1.png)
+![seata1](https://github.com/YOIOc/learning-record/blob/main/image/seata1.png)
 
 ### 9.2.2 准备seata的运行配置文件
 
 将整个seata文件夹拷贝到虚拟机/root目录下
 
-![seata2](https://github.com/YOIOc/learning-record/blob/main\image\seata2.png)
+![seata2](https://github.com/YOIOc/learning-record/blob/main/image/seata2.png)
 
 ### 9.2.3 Docker部署
 
@@ -827,13 +827,13 @@ hm:
 
   由于Seata的客户端在解决分布式事务时需要记录一些中间数据，保存在数据库中，因此需要在使用分布式事务的模块对应的数据库中添加专门的数据库表
 
-![微服务整合Seata1](https://github.com/YOIOc/learning-record/blob/main\image\微服务整合Seata1.png)
+![微服务整合Seata1](https://github.com/YOIOc/learning-record/blob/main/image/微服务整合Seata1.png)
 
 ## 9.4 XA模式
 
 >   XA规范是一套分布式事务处理标准，该标准描述了全局的TM与局部的RM之间的接口
 
-![XA模式](https://github.com/YOIOc/learning-record/blob/main\image\XA模式.png)
+![XA模式](https://github.com/YOIOc/learning-record/blob/main/image/XA模式.png)
 
 **XA模式的优点**
 
@@ -870,7 +870,7 @@ hm:
 
 >   AT模式是Saeta主推的模式，AT模式同样是分阶段提交的事务模型，不过弥补了XA模型中资源锁定周期过长的缺陷
 
-![AT模式](https://github.com/YOIOc/learning-record/blob/main\image\AT模式.png)
+![AT模式](https://github.com/YOIOc/learning-record/blob/main/image/AT模式.png)
 
 **AT模式的优点**
 
