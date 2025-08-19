@@ -3,15 +3,17 @@ package com.hmall.user.domain.po;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.hmall.user.enums.UserStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
- * 
+ * 用户表
  * </p>
  *
  * @author 虎哥
@@ -20,8 +22,8 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("address")
-public class Address implements Serializable {
+@TableName("user")
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,49 +31,36 @@ public class Address implements Serializable {
     private Long id;
 
     /**
-     * 用户ID
+     * 用户名
      */
-    private Long userId;
+    private String username;
 
     /**
-     * 省
+     * 密码，加密存储
      */
-    private String province;
+    private String password;
 
     /**
-     * 市
+     * 注册手机号
      */
-    private String city;
+    private String phone;
 
     /**
-     * 县/区
+     * 创建时间
      */
-    private String town;
+    private LocalDateTime createTime;
+
+    private LocalDateTime updateTime;
 
     /**
-     * 手机
+     * 使用状态（1正常 2冻结）
      */
-    private String mobile;
+    private UserStatus status;
 
     /**
-     * 详细地址
+     * 账户余额
      */
-    private String street;
-
-    /**
-     * 联系人
-     */
-    private String contact;
-
-    /**
-     * 是否是默认 1默认 0否
-     */
-    private Integer isDefault;
-
-    /**
-     * 备注
-     */
-    private String notes;
+    private Integer balance;
 
 
 }
