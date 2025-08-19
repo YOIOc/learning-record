@@ -1,0 +1,20 @@
+server:
+  port: 8083
+feign:
+  okhttp:
+    enabled: true
+  sentinel:
+    enabled: true
+spring:
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8090 # sentinel控制台地址
+      http-method-specify: true # 开启请求方式前缀
+hm:
+  db:
+    database: hm-pay
+  swagger:
+    title: "黑马商城支付服务接口文档"
+    desc: "黑马商城支付服务接口文档"
+    package: com.hmall.pay.controller

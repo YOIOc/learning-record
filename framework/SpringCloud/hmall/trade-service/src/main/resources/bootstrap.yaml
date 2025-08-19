@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: trade-service
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      server-addr: 8.156.77.246:8848
+      config:
+        file-extension: yaml
+        shared-configs:
+          - data-id: shared-jdbc.yml
+          - data-id: shared-log.yml
+          - data-id: shared-swagger.yml
+          - data-id: shared-seata.yml

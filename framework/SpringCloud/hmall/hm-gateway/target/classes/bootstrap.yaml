@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      server-addr: 8.156.77.246:8848
